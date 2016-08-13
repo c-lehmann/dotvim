@@ -1,14 +1,31 @@
 set nocompatible
+filetype off " Required by Vundle
+
+
+" -- Vundle setup
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+Plugin 'nazo/pt.vim'
+Plugin 'YankRing.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" --
+
 set vb " How about STFU
 set hidden " Hidden buffers allowed for better handling of undo, etc...
 set shell=/bin/zsh
 
-"call pathogen#infect()
-"call pathogen#helptags()
-
-
 syntax on
-filetype plugin indent on
 
 set wildmenu
 
@@ -87,9 +104,4 @@ nnoremap <silent> <leader>nt :NERDTree
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-"let g:syntastic_php_checkers = ['phpcs']
-
-"if executable('ag')
-"  let g:ackprg = 'ag --vimgrep'
-"endif
-"let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
