@@ -10,7 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
-Plugin 'nazo/pt.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'YankRing.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
@@ -48,10 +48,10 @@ set ruler
 set t_Co=256 " 256 colors!!!11
 
 set noswapfile
+set background=light
 
 if has("gui_macvim")
   colorscheme solarized
-  set background=dark
   set gfn=Source\ Code\ Pro:h14    " Setting font
   "set gfn=Roboto\ Mono:h14    " Setting font
   set go-=T             " Removing toolbar
@@ -59,6 +59,7 @@ if has("gui_macvim")
   set go-=L             " Removing left scrollbar
   set number            " Linenumbers
   set cursorline
+  let g:airline_powerline_fonts = 1
 else
 endif
 
@@ -79,29 +80,17 @@ augroup vimrcCustom
 
 augroup end
 
-function! ToggleBackground()
-  if &background == 'dark'
-    set background=light
-  else
-    set background=dark
-  end
-  return &background
-endfunction
-
-function! ToggleHls()
-  if &hlsearch
-    set nohls
-  else
-    set hls
-  end
-endfunction
-
 nnoremap <silent> <leader>bgt :call ToggleBackground()<CR>
-nnoremap <silent> <leader>hs :call ToggleHls()<CR>
+nnoremap <silent> <leader>hs :set hls!<CR>
 nnoremap <silent> <leader>nt :NERDTree 
 "
 " Shortcut to .vimrc and shortcut for reloading .vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-let g:airline_powerline_fonts = 1
+nnoremap <Leader>a :Ack!<Space>
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+let g:NERDTreeChDirMode = 2
